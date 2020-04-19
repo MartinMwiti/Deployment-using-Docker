@@ -3,19 +3,17 @@ version: '3.7'
 services:  
 
     flask:
-        image: flask_blog       
         build: ./flask
-        container_name: flask_blog
+        container_name: flask
         restart: always
         environment: 
-            - APP_NAME= python-flask+postgres
+            - APP_NAME=python-flask+postgres
         expose:
             - 8080
 
     nginx:    
-        image: nginx_blog
         build: ./nginx
-        container_name: nginx_blog
+        container_name: nginx
         restart: always
         ports:
             - 80:80
