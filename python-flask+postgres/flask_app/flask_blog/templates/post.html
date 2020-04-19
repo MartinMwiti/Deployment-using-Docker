@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <!--posts contains all the info concerning new post. This is obtained from the route.py file (home) route which obtaines from the database saved by the new_post route-->
+    <article class="media content-section">
+        <!-- article-img is custom css -->
+        <img src="{{ url_for('static', filename='pics/'+ post.author.image_file) }}" alt=""
+            class="rounded-circle article-img">
+        <!--the author is a backref that give us access to the entire User and its attributes -->
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="{{ url_for('users.user_post', username=post.author.username) }}">{{ post.author.username }}</a>
+                <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}
+                    {% if post.author == current_user %} <!--only current_user/owner of the post can update the post-->
+                        <div>
+                            <a href="{{ url_for('posts.update_post', post_id=post.id) }}" class="btn btn-secondary btn-sm mt-1 mb-1">Update</a>
+                            <button type= 'button' class="btn btn-danger btn-sm-1" data-toggle="modal" data-target="#deleteModal">Delete</button> <!--https://getbootstrap.com/docs/4.0/components/modal/#live-demo-->
+                        </div>
+                    {% endif %}
+                </small>
+            </div>
+                <h2 class="article-title">{{ post.title }}</h2>
+            <p class="article-content">{{ post.content }}</p>
+        </div>
+    </article>
+
+    <!-- Modal --> <!--https://getbootstrap.com/docs/4.0/components/modal/#live-demo-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+              
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST">
+                        <input type="submit" name="" value="Delete" class="btn btn-danger">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

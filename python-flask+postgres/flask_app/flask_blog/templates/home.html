@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %} 
+
+    {% for post in posts.items %} <!--posts.items: since we're using pagination.posts contains all the info concerning new post. This is obtained from the route.py file (home) route which obtaines from the database saved by the new_post route-->
+        <article class="media content-section">
+            <!-- article-img is custom css -->
+            <img src="{{ url_for('static', filename='pics/'+ post.author.image_file) }}" alt="" class="rounded-circle article-img"> <!--the author is a backref that give us access to the entire User and its attributes -->
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="{{ url_for('users.user_post', username=post.author.username) }}">{{ post.author.username }}</a>
+                    <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+                </div>
+                <!--CONTENT BODY-->
+                <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
+                <p class="article-content">{{ post.content }}</p>
+            </div>
+        </article>
+    {% endfor %}
+
+    <!--PAGINATION-->
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1,right_current=2) %}
+    {% if page_num %}
+    <!--if we have a page number -->
+    {% if posts.page == page_num %}
+    <!--this if statement will deal with the shade of the button. -->
+    <a class='btn btn-outline-info mb-4' href="{{ url_for("main.home", page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+    <a class='btn btn-info mb-4' href="{{ url_for("main.home", page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+    {% else %}
+    ...
+    <!--if page_num is None show '...'-->
+    {% endif %}
+    {% endfor %}
+
+{% endblock content %}
