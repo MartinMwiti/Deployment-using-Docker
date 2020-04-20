@@ -15,7 +15,7 @@ This will be dealt by the ``app.py`` file in our project directory:
       [uwsgi]
       wsgi-file = run.py
       callable = app
-      socket = :8080 ;listen to port 8080 for any requests from flask which has exposed port 8080
+      socket = :8080 
       processes = 4
       threads = 2
       master = true
