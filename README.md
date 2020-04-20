@@ -32,15 +32,19 @@ This will be dealt by the ``app.py`` file in our project directory:
  
  * Next, we’ll tell uWSGI to start up in ``master`` mode and spawn four worker processes to serve actual requests.
  
- * I have changed the permissions on the socket. I’ll be giving the Nginx group ownership of the uWSGI process later on, so i needed to make sure the group owner of the socket can read information from it and write to it. I also cleaned up the socket when the process stops by adding the vacuum option.
+ * I have changed the permissions on the socket. I’ll be giving the Nginx group ownership of the uWSGI process later on, so i needed to make sure the group owner of the socket can read information from it and write to it. ``vacuum: true`` cleans up the socket when the process stops.
  
  * Lastly ``die-on-term`` option. This can help ensure that the init system and uWSGI have the same assumptions about what each process signal means. Setting this aligns the two system components, implementing the expected behavior
 
 ### Building docker-compose
 * After creating flask, database and Nginx images. Build a docker-compose based on those containers by running: 
-      ```sudo docker-compose build```
+         
+        ```sudo docker-compose build```
+         
 * After building the docker-compose, run the docker-compose by using the command:
-      ```sudo docker-compose up```
+         
+        ```sudo docker-compose up```
 * To end/close the running docker containers, run:
-      ```sudo docker-compose down```
+         
+        ```sudo docker-compose down```
 
