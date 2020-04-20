@@ -36,4 +36,11 @@ This will be dealt by the ``app.py`` file in our project directory:
  
  * Lastly ``die-on-term`` option. This can help ensure that the init system and uWSGI have the same assumptions about what each process signal means. Setting this aligns the two system components, implementing the expected behavior
 
+### Building docker-compose
+* After creating flask, database and Nginx images. Build a docker-compose based on those containers by running: 
+      ```sudo docker-compose build```
+* After building the docker-compose, run the docker-compose by using the command:
+      ```sudo docker-compose up```
+* To end/close the running docker containers, run:
+      ```sudo docker-compose down```
 
