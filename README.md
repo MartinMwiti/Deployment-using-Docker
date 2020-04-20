@@ -4,26 +4,25 @@ Containerizing and deployment of Python-flask+Django apps with Docker, Nginx and
 The following is a guide on how i have containerized and deployed a python-flask app connected to an SQL database using Docker, Nginx, uWSGI and Postgres database.
 
 ## Prerequisites
-* A server with Linux(I'm using Ubuntu 18.04) installed.
+* A server with Linux (I'm using Ubuntu 18.04) installed.
 
 * Nginx installed. Follow [How To Install Nginx on Ubuntu 18.04.](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04)  
 
 ### uWSGI Configuration File
 This will be dealt by the ``app.py`` file in our project directory:
-  ``
-    [uwsgi]
+   
   
-    wsgi-file = run.py
-    callable = app
-    socket = :8080 ;listen to port 8080 for any requests from flask which has exposed port 8080
-    processes = 4
-    threads = 2
-    master = true
-    chmod-socket = 660
-    vacuum = true
-    die-on-term = true
+      [uwsgi]
+      wsgi-file = run.py
+      callable = app
+      socket = :8080 ;listen to port 8080 for any requests from flask which has exposed port 8080
+      processes = 4
+      threads = 2
+      master = true
+      chmod-socket = 660
+      vacuum = true
+      die-on-term = true
     
-    ``
     
  * ``[uwsgi]`` header that lets uWSGI knows to apply the settings provided. 
  
