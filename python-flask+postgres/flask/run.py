@@ -4,4 +4,4 @@ from flask_blog import create_app
 app = create_app()  # we don't pass anaything because we're using 'Config' as the default input
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
