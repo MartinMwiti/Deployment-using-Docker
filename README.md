@@ -35,7 +35,17 @@ This will be dealt by the ``app.py`` file in our project directory:
  * I have changed the permissions on the socket. I’ll be giving the Nginx group ownership of the uWSGI process later on, so i needed to make sure the group owner of the socket can read information from it and write to it. ``vacuum: true`` cleans up the socket when the process stops.
  
  * Lastly ``die-on-term`` option. This can help ensure that the init system and uWSGI have the same assumptions about what each process signal means. Setting this aligns the two system components, implementing the expected behavior
+---
+## General Layout:
+* Using Nginx
 
+   - Layout 1![Layout 1](https://hackernoon.com/photos/Ddx1Gu84SLTrEuGRGR6lu7txNc12-jvub3xvm)
+   
+   - Layout 2![Layout 2](https://camo.githubusercontent.com/b028531e5cd4eed10d4b9e7f873d57a91f1cdfd7/68747470733a2f2f696d6167652e736c696465736861726563646e2e636f6d2f707974686f6e6465766f70732d3133303330343138313532352d70687061707030322f39352f707974686f6e2d6465766f70732d796f75722d6f776e2d6865726f6b752d33322d3633382e6a70673f63623d31333633323635353735)
+   
+* Using gunicorn
+   ![Layout](https://miro.medium.com/max/1000/1*_tIjoh9xdUe22ttIDFrZ9A.png)
+---
 ### Building docker-compose
 * After creating flask, database and Nginx images. Build a docker-compose based on those containers by running: 
          
@@ -47,4 +57,6 @@ This will be dealt by the ``app.py`` file in our project directory:
 * To end/close the running docker containers, run:
          
        sudo docker-compose down
-
+---
+## Additional Info
+[How to do rapid prototyping with Flask, uWSGI, NGINX, and Docker on OpenShift](https://towardsdatascience.com/how-to-do-rapid-prototyping-with-flask-uwsgi-nginx-and-docker-on-openshift-f0ef144033cb)
