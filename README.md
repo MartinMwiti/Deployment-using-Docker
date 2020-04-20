@@ -39,12 +39,12 @@ This will be dealt by the ``app.py`` file in our project directory:
 ### Building docker-compose
 * After creating flask, database and Nginx images. Build a docker-compose based on those containers by running: 
          
-        ```sudo docker-compose build```
+        sudo docker-compose build
          
 * After building the docker-compose, run the docker-compose by using the command:
          
-        ```sudo docker-compose up```
+       sudo docker-compose up
 * To end/close the running docker containers, run:
          
-        ```sudo docker-compose down```
+       sudo docker-compose down
 
